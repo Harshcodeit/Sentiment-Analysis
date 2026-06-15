@@ -2,18 +2,20 @@ import streamlit as st
 import pandas as pd
 import joblib
 import string
-from nltk.corpus import stopwords
-from nltk.tokenize import word_tokenize
 import nltk
+from nltk.corpus import stopwords
 
-try:
-    nltk.data.find('tokenizers/punkt')
-except:
-    nltk.download('punkt')
+# from nltk.tokenize import word_tokenize
+
+
+# try:
+#     nltk.data.find('tokenizers/punkt')
+# except:
+#     nltk.download('punkt')
 
 try:
     nltk.data.find('corpora/stopwords')
-except:
+except LookupError:
     nltk.download('stopwords')
 
 stop_words=set(stopwords.words('english'))
@@ -32,7 +34,8 @@ def clean_text(txt):
             new+=i
 
     # remove stop words
-    words=word_tokenize(new)
+    # words=word_tokenize(new)
+    words=new.split()
     cleaned=[]
     for i in words:
         if not i in stop_words:
